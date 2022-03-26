@@ -10,19 +10,18 @@ const errorToString = ({ message, locations }: GqlError) =>
  * Transforms an array of GqlError into a string.
  *
  * @example
- *
- * const gqlRespose = {
+ * const gqlResponse = {
  *   errors: [
  *     {message: "First Error", locations: [{column: 10, line: 2}]},
  *     {message: "Second Error", locations: [{column: 2, line: 4}]}
  *   ]
  * }
  *
- * const error = errorsToString(gqlRespose.errors);
+ * const error = errorsToString(gqlResponse.errors);
  * // string with the following:
  * // First Error (2:10)
  * // Second Error (4:2)
  */
-const errorsToString = (gqlErrors: Array<GqlError>): string => gqlErrors.map(errorToString).join('\n');
+const errorsToString = (gqlErrors: GqlError[]): string => gqlErrors.map(errorToString).join('\n');
 
 export default errorsToString;

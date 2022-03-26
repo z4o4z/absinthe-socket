@@ -38,8 +38,10 @@
   ],
   "dependencies": {
     "@absinthe/socket": "0.2.1",
-    "@jumpn/utils-graphql": "0.6.0",
+    "@absinthe/graphql-utils": "^0.2.1",
     "react-relay": "1.7.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/react-relay": "^13.0.1"
+  }
 }

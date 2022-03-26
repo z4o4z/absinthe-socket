@@ -1,11 +1,10 @@
-import { Observable } from 'zen-observable-ts';
 import type { EmptyObject } from '@absinthe/graphql-utils';
+import { Observable, ZenObservable } from 'zen-observable-ts';
 
 import notifierFind from './notifier/find';
-import observe from './observe';
-
-import type { AbsintheSocket } from './types';
 import type { Notifier, Observer } from './notifier/types';
+import observe from './observe';
+import type { AbsintheSocket } from './types';
 
 type Unsubscribe<Result, Variables extends void | EmptyObject> = (
   absintheSocket: AbsintheSocket,

@@ -1,9 +1,8 @@
 import notifierRefresh from './notifier/refresh';
-import notifierUnobserve from './notifier/unobserve';
-import updateNotifiers from './updateNotifiers';
-
-import type { AbsintheSocket } from './types';
 import type { Notifier, Observer } from './notifier/types';
+import notifierUnobserve from './notifier/unobserve';
+import type { AbsintheSocket } from './types';
+import updateNotifiers from './updateNotifiers';
 
 const ensureHasActiveObserver = (notifier: Notifier<any, any>, observer: Observer<any, any>) => {
   if (notifier.activeObservers.includes(observer)) return notifier;

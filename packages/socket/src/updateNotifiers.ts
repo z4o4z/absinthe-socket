@@ -1,9 +1,11 @@
-import type { AbsintheSocket } from './types';
 import type { Notifier } from './notifier/types';
+import type { AbsintheSocket } from './types';
 
-type Notifiers = Array<Notifier<any, any>>;
-
-const updateNotifiers = (absintheSocket: AbsintheSocket, updater: (notifiers: Notifiers) => Notifiers) => {
+const updateNotifiers = (
+  absintheSocket: AbsintheSocket,
+  updater: (notifiers: Notifier<any, any>[]) => Notifier<any, any>[],
+): AbsintheSocket => {
+  // eslint-disable-next-line no-param-reassign
   absintheSocket.notifiers = updater(absintheSocket.notifiers);
 
   return absintheSocket;

@@ -1,10 +1,9 @@
 import type { EmptyObject } from '@absinthe/graphql-utils';
 
 import cancel from './cancel';
-import unobserve from './unobserve';
-
-import type { AbsintheSocket } from './types';
 import type { Notifier, Observer } from './notifier/types';
+import type { AbsintheSocket } from './types';
+import unobserve from './unobserve';
 
 const doUnobserveOrCancel = <Result, Variables extends void | EmptyObject>(
   absintheSocket: AbsintheSocket,

@@ -1,8 +1,8 @@
 import notifierCancel from './notifier/cancel';
+import { RequestStatus } from './notifier/constants';
 import notifierFlushCanceled from './notifier/flushCanceled';
 import notifierRefresh from './notifier/refresh';
 import notifierRemove from './notifier/remove';
-import { RequestStatus } from './notifier/constants';
 import type { Notifier } from './notifier/types';
 import refreshNotifier from './refreshNotifier';
 import { unsubscribe } from './subscription';

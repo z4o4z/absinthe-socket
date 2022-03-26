@@ -10,11 +10,6 @@ export interface GqlError {
   locations?: GqlErrorLocation[];
 }
 
-export interface GqlRequest<Variables extends void | EmptyObject = void> {
-  operation: string;
-  variables?: Variables;
-}
-
 export interface GqlRequestCompat<Variables extends void | EmptyObject = void> {
   query: string;
   variables?: Variables;
@@ -26,3 +21,8 @@ export interface GqlResponse<Data> {
 }
 
 export type GqlOperationType = 'mutation' | 'query' | 'subscription';
+
+export interface GqlRequest<Variables extends void | EmptyObject = void> {
+  operation: GqlOperationType;
+  variables?: Variables;
+}

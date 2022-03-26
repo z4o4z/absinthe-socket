@@ -1,8 +1,7 @@
 import handlePush from './handlePush';
+import { createErrorEvent } from './notifier/event/eventCreators';
 import notifierNotifyActive from './notifier/notifyActive';
 import pushRequest from './pushRequest';
-import { createErrorEvent } from './notifier/event/eventCreators';
-
 import type { AbsintheSocket } from './types';
 
 const createChannelJoinError = (message: string) => new Error(`channel join: ${message}`);
@@ -25,6 +24,7 @@ const createChannelJoinHandler = (absintheSocket: AbsintheSocket) => ({
 const joinChannel = (absintheSocket: AbsintheSocket) => {
   handlePush(absintheSocket.channel.join(), createChannelJoinHandler(absintheSocket));
 
+  // eslint-disable-next-line no-param-reassign
   absintheSocket.channelJoinCreated = true;
 
   return absintheSocket;

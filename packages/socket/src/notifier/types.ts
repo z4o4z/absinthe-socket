@@ -1,14 +1,15 @@
-import type { GqlOperationType, GqlRequest, EmptyObject } from '@absinthe/graphql-utils';
+import type { EmptyObject, GqlOperationType, GqlRequest } from '@absinthe/graphql-utils';
 
-import type { EventName } from './event/constants';
 import type { RequestStatus } from './constants';
+import type { EventName } from './event/constants';
 
 export interface Observer<Result, Variables extends void | EmptyObject = void> {
-  onAbort?: (error: Error) => void;
-  onError?: (error: Error) => void;
-  onStart?: (notifier: Notifier<Result, Variables>) => void;
-  onCancel?: () => void;
-  onResult?: (result: Result) => void;
+  onAbort?: ((error: Error) => void) | undefined;
+  onError?: ((error: Error) => void) | undefined;
+  // eslint-disable-next-line no-use-before-define
+  onStart?: ((notifier: Notifier<Result, Variables>) => void) | undefined;
+  onCancel?: (() => void) | undefined;
+  onResult?: ((result: Result) => void) | undefined;
 }
 
 export interface Notifier<Result, Variables extends void | EmptyObject = void> {
@@ -19,6 +20,11 @@ export interface Notifier<Result, Variables extends void | EmptyObject = void> {
   subscriptionId?: string;
   activeObservers: ReadonlyArray<Observer<Result, Variables>>;
   canceledObservers: ReadonlyArray<Observer<Result, Variables>>;
+}
+
+export interface NotifierSubscribed<Result, Variables extends void | EmptyObject = void>
+  extends Notifier<Result, Variables> {
+  subscriptionId: string;
 }
 
 export interface BaseEvent<Payload = void> {
@@ -38,11 +44,11 @@ export interface CancelEvent extends BaseEvent {
   name: EventName.CANCEL;
 }
 
-export interface ErrorEvent extends BaseEvent<Error> {
+export interface ErrorEvent<Err extends Error = Error> extends BaseEvent<Err> {
   name: EventName.ERROR;
 }
 
-export interface AbortEvent extends BaseEvent<Error> {
+export interface AbortEvent<Err extends Error = Error> extends BaseEvent<Err> {
   name: EventName.ABORT;
 }
 

@@ -1,10 +1,9 @@
 import type { EmptyObject } from '@absinthe/graphql-utils';
 
 import notifierObserve from './notifier/observe';
-import refreshNotifier from './refreshNotifier';
-
-import type { AbsintheSocket } from './types';
 import type { Notifier, Observer } from './notifier/types';
+import refreshNotifier from './refreshNotifier';
+import type { AbsintheSocket } from './types';
 
 /**
  * Observes given notifier using the provided observer

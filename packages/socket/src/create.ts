@@ -1,22 +1,18 @@
-// @flow
-
 import { Socket as PhoenixSocket } from 'phoenix';
-
-import type { Message } from 'phoenix';
 
 import abortNotifier from './abortNotifier';
 import joinChannel from './joinChannel';
+import { createErrorEvent } from './notifier/event/eventCreators';
 import notifierNotify from './notifier/notify';
 import notifierRemove from './notifier/remove';
 import notifierReset from './notifier/reset';
+import { Notifier } from './notifier/types';
 import refreshNotifier from './refreshNotifier';
-import updateNotifiers from './updateNotifiers';
 import * as withSubscription from './subscription';
-import { createErrorEvent } from './notifier/event/eventCreators';
-
 import type { AbsintheSocket } from './types';
+import updateNotifiers from './updateNotifiers';
 
-const onMessage = (absintheSocket) => (message: Message<>) => {
+const onMessage = (absintheSocket: AbsintheSocket) => (message: unknown) => {
   if (withSubscription.isDataMessage(message)) {
     withSubscription.onDataMessage(absintheSocket, message);
   }
@@ -24,13 +20,13 @@ const onMessage = (absintheSocket) => (message: Message<>) => {
 
 const createConnectionCloseError = () => new Error('connection: close');
 
-const notifyConnectionCloseError = (notifier) =>
+const notifyConnectionCloseError = (notifier: Notifier<any, any>) =>
   notifierNotify(notifier, createErrorEvent(createConnectionCloseError()));
 
-const notifierOnConnectionCloseCanceled = (absintheSocket, notifier) =>
+const notifierOnConnectionCloseCanceled = (absintheSocket: AbsintheSocket, notifier: Notifier<any, any>) =>
   updateNotifiers(absintheSocket, notifierRemove(notifyConnectionCloseError(notifier)));
 
-const notifierOnConnectionCloseActive = (absintheSocket, notifier) => {
+const notifierOnConnectionCloseActive = (absintheSocket: AbsintheSocket, notifier: Notifier<any, any>) => {
   if (notifier.operationType === 'mutation') {
     abortNotifier(absintheSocket, notifier, createConnectionCloseError());
   } else {

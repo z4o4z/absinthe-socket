@@ -5,9 +5,9 @@ import type { Notifier, Observer } from './notifier/types';
 
 export interface AbsintheSocket {
   channel: Channel;
-  channelJoinCreated: boolean;
-  notifiers: Array<Notifier<any>>;
+  notifiers: Notifier<any, any>[];
   phoenixSocket: PhoenixSocket;
+  channelJoinCreated: boolean;
 }
 
 export interface PushHandler<Response extends EmptyObject> {
