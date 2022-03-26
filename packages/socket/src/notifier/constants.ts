@@ -1,8 +1,8 @@
 export enum RequestStatus {
+  SENT = "sent",
+  PENDING = "pending",
+  sending = "sending",
   CANCELED = "canceled",
   CANCELING = "canceling",
-  PENDING = "pending",
-  SENT = "sent",
-  sending = "sending",
 };
 
