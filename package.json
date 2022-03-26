@@ -5,7 +5,8 @@
     "packages/*"
   ],
   "scripts": {
-    "lint": "eslint"
+    "lint": "eslint",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.js": [
