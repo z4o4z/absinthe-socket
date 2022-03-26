@@ -5,7 +5,7 @@ const cancel = <Result, Variables extends void | EmptyObject>({
   activeObservers,
   canceledObservers,
   ...rest
-}: Notifier<Result, Variables>) => ({
+}: Notifier<Result, Variables>):Notifier<Result, Variables> => ({
   ...rest,
   isActive: false,
   activeObservers: [],
