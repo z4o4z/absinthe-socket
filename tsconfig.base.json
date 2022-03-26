@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "rootDir": ".",
+    "baseUrl": ".",
+    "sourceMap": true,
+    "declaration": true,
+    "skipLibCheck": false,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+
+    /* Strictness Checks */
+    "strict": true,
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "allowUnusedLabels": false,
+    "noImplicitReturns": true,
+    "noUnusedParameters": true,
+    "noImplicitOverride": true,
+    "allowUnreachableCode": false,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noPropertyAccessFromIndexSignature": true,
+
+    /* Debugging Options */
+    "lib": ["es2017"],
+    "pretty": true,
+    "listFiles": false,
+    "typeRoots": ["./node_modules/@types"],
+    "traceResolution": false,
+    "listEmittedFiles": false,
+
+    "paths": {
+      "@absinthe/graphql-utils": ["packages/graphql-utils/src/index.ts"],
+      "@absinthe/socket": ["packages/socket/src/index.ts"],
+      "@absinthe/socket-apollo-link": [
+        "packages/socket-apollo-link/src/index.ts"
+      ],
+      "@absinthe/socket-graphiql": ["packages/socket-graphiql/src/index.ts"],
+      "@absinthe/socket-relay": ["packages/socket-relay/src/index.ts"]
+    }
+  }
+}

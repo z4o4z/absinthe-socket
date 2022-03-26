@@ -1,9 +1,9 @@
 {
-  "name": "@absinthe/socket-relay",
+  "name": "@absinthe/graphql-utils",
   "version": "0.2.1",
-  "description": "Absinthe Socket Relay",
+  "description": "Absinthe Graphql Utilities",
   "module": "dist/index.js",
-  "main": "src/index.js",
+  "main": "compat/cjs/index.js",
   "react-native": "src/index",
   "scripts": {
     "version": "nps version",
@@ -18,22 +18,24 @@
   "bugs": {
     "url": "https://github.com/absinthe-graphql/absinthe-socket/issues"
   },
-  "homepage": "https://github.com/absinthe-graphql/absinthe-socket/tree/master/packages/absinthe-socket-relay#readme",
+  "homepage": "https://github.com/absinthe-graphql/absinthe-socket#readme",
   "keywords": [
     "absinthe",
     "phoenix",
     "socket",
-    "relay",
     "client",
     "graphql",
     "utilities",
     "utils"
   ],
   "dependencies": {
-    "@absinthe/socket": "0.2.1",
+    "@jumpn/utils-array": "0.3.4",
+    "@jumpn/utils-composite": "0.7.0",
     "@jumpn/utils-graphql": "0.6.0",
-    "@jumpn/utils-promise": "0.3.1",
-    "react-relay": "1.7.0"
+    "zen-observable": "0.8.11"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "peerDependencies": {
+    "phoenix": "^1.4.0"
+  }
 }
