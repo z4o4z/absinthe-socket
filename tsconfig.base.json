@@ -1,4 +1,8 @@
 {
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser"
+  },
+  "plugins": ["@typescript-eslint"],
   "compilerOptions": {
     "target": "es2017",
     "rootDir": ".",
@@ -36,9 +40,7 @@
     "paths": {
       "@absinthe/graphql-utils": ["packages/graphql-utils/src/index.ts"],
       "@absinthe/socket": ["packages/socket/src/index.ts"],
-      "@absinthe/socket-apollo-link": [
-        "packages/socket-apollo-link/src/index.ts"
-      ],
+      "@absinthe/socket-apollo-link": ["packages/socket-apollo-link/src/index.ts"],
       "@absinthe/socket-graphiql": ["packages/socket-graphiql/src/index.ts"],
       "@absinthe/socket-relay": ["packages/socket-relay/src/index.ts"]
     }

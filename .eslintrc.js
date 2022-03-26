@@ -4,6 +4,7 @@ module.exports = {
   extends: 'airbnb-base',
   plugins: ['@typescript-eslint', 'simple-import-sort', 'import'],
   rules: {
+    'max-len': ['error', { code: 120 }],
     'no-undef': 'off',
     'no-shadow': 'off',
     'simple-import-sort/imports': 'error',
