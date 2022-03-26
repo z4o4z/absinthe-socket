@@ -1,4 +1,5 @@
 import deepEqual from 'fast-deep-equal';
+
 import type { Notifier } from './types';
 
 const find = <Key extends keyof Notifier<any, any>>(

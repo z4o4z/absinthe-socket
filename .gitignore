@@ -8,4 +8,4 @@ yarn-error.log
 # build
 
 compat/
-dist/
+**/dist/
