@@ -28,14 +28,7 @@
     "utilities",
     "utils"
   ],
-  "dependencies": {
-    "@jumpn/utils-array": "0.3.4",
-    "@jumpn/utils-composite": "0.7.0",
-    "@jumpn/utils-graphql": "0.6.0",
-    "zen-observable": "0.8.11"
-  },
+  "dependencies": {},
   "devDependencies": {},
-  "peerDependencies": {
-    "phoenix": "^1.4.0"
-  }
+  "peerDependencies": {}
 }

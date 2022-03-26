@@ -3,8 +3,10 @@
 ## Packages
 
 - [@absinthe/socket](packages/socket)
-- [@absinthe/socket-apollo-link](packages/socket-apollo-link)
 - [@absinthe/socket-relay](packages/socket-relay)
+- [@absinthe/graphql-utils](packages/graphql-utils)
+- [@absinthe/socket-graphiql](packages/socket-graphiql)
+- [@absinthe/socket-apollo-link](packages/socket-apollo-link)
 
 ## License
 

@@ -58,6 +58,6 @@ export type AnyEvent =
   | AbortEvent
   | CancelEvent
   | ErrorEvent
-  | ResultEvent<unknown>
-  | StartEvent<Notifier<unknown, void | EmptyObject>>;
+  | ResultEvent<any>
+  | StartEvent<Notifier<any, any>>;
 
