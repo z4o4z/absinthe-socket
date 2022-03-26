@@ -1,10 +1,8 @@
 import type {EmptyObject} from '@absinthe/graphql-utils';
 
-
-
 import {AbsintheEventName} from "./constants";
 
-import type {AbsintheDocEvent, AbsintheUnsubscribeEvent, AbsintheUnsubscribeEventPayload, } from "./types";
+import type {AbsintheDocEvent, AbsintheUnsubscribeEvent, AbsintheUnsubscribeEventPayload, AbsintheDocEventPayload} from "./types";
 
 export const createAbsintheUnsubscribeEvent = (
   payload: AbsintheUnsubscribeEventPayload
@@ -14,10 +12,10 @@ export const createAbsintheUnsubscribeEvent = (
 });
 
 export const createAbsintheDocEvent = <Variables extends void | EmptyObject>(
-  payload: $ElementType<AbsintheDocEvent<Variables>, "payload">
+  payload: AbsintheDocEventPayload<Variables>
 ): AbsintheDocEvent<Variables> => ({
+  name: AbsintheEventName.DOC,
   payload,
-  name: absintheEventNames.doc
 });
 
 

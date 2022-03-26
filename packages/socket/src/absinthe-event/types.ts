@@ -2,8 +2,6 @@ import type {EmptyObject,GqlRequestCompat} from '@absinthe/graphql-utils';
 
 import {AbsintheEventName} from "./constants";
 
-
-
 export interface BaseAbsintheEvent<Payload> {
   name: AbsintheEventName,
   payload: Payload

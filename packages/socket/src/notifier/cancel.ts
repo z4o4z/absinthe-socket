@@ -1,8 +1,7 @@
-// @flow
-
+import type {EmptyObject} from '@absinthe/graphql-utils';
 import type {Notifier} from "./types";
 
-const cancel = <Result, Variables: void | Object>({
+const cancel = <Result, Variables extends void | EmptyObject>({
   activeObservers,
   canceledObservers,
   ...rest
