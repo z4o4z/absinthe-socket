@@ -1,12 +1,10 @@
-// @flow
+import type {Message} from "phoenix";
+import type { GqlError,
+  GqlResponse } from '@absinthe/graphql-utils';
+
 
 import {errorsToString as gqlErrorsToString} from "@jumpn/utils-graphql";
 
-import type {
-  GqlError,
-  GqlResponse
-} from "@jumpn/utils-graphql/compat/cjs/types";
-import type {Message} from "phoenix";
 
 import abortNotifier from "./abortNotifier";
 import notifierFind from "./notifier/find";
@@ -27,17 +25,15 @@ import {createErrorEvent} from "./notifier/event/eventCreators";
 import type {AbsintheSocket, NotifierPushHandler} from "./types";
 import type {Notifier} from "./notifier/types";
 
-type SubscriptionPayload<Data> = {|
+interface SubscriptionPayload<Data> {
   result: GqlResponse<Data>,
   subscriptionId: string
-|};
+};
 
 // TODO: improve this type
-type UnsubscribeResponse = {};
+interface UnsubscribeResponse  {};
 
-type SubscriptionResponse =
-  | {|subscriptionId: string|}
-  | {|errors: Array<GqlError>|};
+type SubscriptionResponse =  {subscriptionId: string} | {errors: Array<GqlError>};
 
 const onUnsubscribeSucceedCanceled = (absintheSocket, notifier) =>
   updateNotifiers(
