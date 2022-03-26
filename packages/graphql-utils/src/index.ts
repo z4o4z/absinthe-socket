@@ -1,11 +1,11 @@
+export { default as errorsToString } from './errorsToString';
+export { default as getOperationType } from './getOperationType';
 export type {
+  EmptyObject,
+  GqlError,
   GqlErrorLocation,
-GqlError,
-GqlRequest,
-EmptyObject,
-GqlRequestCompat,
-GqlResponse,
-GqlOperationType,
-} from './types'
-
-export {default as getOperationType} from './getOperationType'
+  GqlOperationType,
+  GqlRequest,
+  GqlRequestCompat,
+  GqlResponse,
+} from './types';

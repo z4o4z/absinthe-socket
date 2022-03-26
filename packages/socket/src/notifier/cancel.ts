@@ -1,15 +1,16 @@
-import type {EmptyObject} from '@absinthe/graphql-utils';
-import type {Notifier} from "./types";
+import type { EmptyObject } from '@absinthe/graphql-utils';
+
+import type { Notifier } from './types';
 
 const cancel = <Result, Variables extends void | EmptyObject>({
   activeObservers,
   canceledObservers,
   ...rest
-}: Notifier<Result, Variables>):Notifier<Result, Variables> => ({
+}: Notifier<Result, Variables>): Notifier<Result, Variables> => ({
   ...rest,
   isActive: false,
   activeObservers: [],
-  canceledObservers: [...activeObservers, ...canceledObservers]
+  canceledObservers: [...activeObservers, ...canceledObservers],
 });
 
 export default cancel;

@@ -1,9 +1,9 @@
-import type {GqlOperationType} from "./types";
+import type { GqlOperationType } from './types';
 
 const OPERATION_TYPE_REGEX = /^\s*(query|mutation|subscription|\{)/;
 
 const getOperationTypeFromMatched = (matched: string): GqlOperationType =>
-  matched === "{" ? "query" : (matched as GqlOperationType);
+  matched === '{' ? 'query' : (matched as GqlOperationType);
 
 /**
  * Returns the type (query, mutation, or subscription) of the given operation
