@@ -5,7 +5,8 @@
     "packages/*"
   ],
   "scripts": {
-    "lint": "eslint",
+    "lint:all": "nx run-many --target=lint --all",
+    "build:all": "nx run-many --target=build --all",
     "prepare": "husky install"
   },
   "lint-staged": {

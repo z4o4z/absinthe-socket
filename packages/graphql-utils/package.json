@@ -10,10 +10,8 @@
     "build:esm": "tsc --project ./tsconfig.lib.json --module esnext --outDir ./dist/esm",
     "build:cjs": "tsc --project ./tsconfig.lib.json --module commonjs --outDir ./dist/cjs",
     "clean": "rimraf build",
-    "commit": "cz",
-    "eslint-output": "eslint-output",
-    "lint": "eslint '**/*.{js,ts}'",
-    "lint:output": "yarn run eslint-output --quiet \"**/*.{js,ts}\"",
+    "lint": "eslint '**/*.ts'",
+    "lint:output": "yarn run eslint-output --quiet \"**/*.ts\"",
     "lint:quiet": "yarn lint --quiet",
     "lint:report": "yarn lint:output",
     "prepublishOnly": "yarn build"
