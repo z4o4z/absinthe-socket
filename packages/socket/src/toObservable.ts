@@ -1,5 +1,5 @@
 import type { EmptyObject } from '@absinthe/graphql-utils';
-import { Observable, ZenObservable } from 'zen-observable-ts';
+import { Observable } from 'zen-observable-ts';
 
 import notifierFind from './notifier/find';
 import type { Notifier, Observer } from './notifier/types';

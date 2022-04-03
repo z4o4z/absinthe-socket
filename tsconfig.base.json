@@ -10,7 +10,7 @@
     "baseUrl": ".",
     "sourceMap": false,
     "declaration": true,
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "declarationMap": false,
     "esModuleInterop": true,
     "moduleResolution": "node",

@@ -3,7 +3,7 @@ import { RequestStatus } from './notifier/constants';
 import notifierFlushCanceled from './notifier/flushCanceled';
 import notifierRefresh from './notifier/refresh';
 import notifierRemove from './notifier/remove';
-import type { Notifier } from './notifier/types';
+import type { Notifier, NotifierSubscribed } from './notifier/types';
 import refreshNotifier from './refreshNotifier';
 import { unsubscribe } from './subscription';
 import type { AbsintheSocket } from './types';
@@ -26,7 +26,9 @@ const cancelQueryOrMutation = (absintheSocket: AbsintheSocket, notifier: Notifie
     : cancelQueryOrMutationIfSending(absintheSocket, notifier);
 
 const unsubscribeIfNeeded = (absintheSocket: AbsintheSocket, notifier: Notifier<any, any>) =>
-  notifier.requestStatus === RequestStatus.SENT ? unsubscribe(absintheSocket, notifier) : absintheSocket;
+  notifier.requestStatus === RequestStatus.SENT && !!notifier.subscriptionId
+    ? unsubscribe(absintheSocket, notifier as NotifierSubscribed<any, any>)
+    : absintheSocket;
 
 const cancelNonPendingSubscription = (absintheSocket: AbsintheSocket, notifier: Notifier<any, any>) =>
   unsubscribeIfNeeded(absintheSocket, refreshNotifier(absintheSocket, notifierCancel(notifier)));

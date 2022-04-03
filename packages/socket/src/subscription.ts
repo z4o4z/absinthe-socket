@@ -39,7 +39,11 @@ interface UnsubscribeResponse {}
 
 type SubscriptionResponse = SubscriptionResponseSuccess | SubscriptionResponseError;
 
-interface DataMessage {
+interface BaseMessage {
+  event: string;
+}
+
+interface DataMessage extends BaseMessage {
   event: typeof DATA_MESSAGE_EVENT;
   payload: SubscriptionPayload<any>;
 }
@@ -121,3 +125,6 @@ export const onDataMessage = (absintheSocket: AbsintheSocket, { payload }: DataM
     notifierNotifyResultEvent(notifier, payload.result);
   }
 };
+
+export const isDataMessage = (message: unknown): message is DataMessage =>
+  !!message && typeof message === 'object' && (message as BaseMessage).event === DATA_MESSAGE_EVENT;

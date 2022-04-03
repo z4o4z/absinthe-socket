@@ -34,7 +34,7 @@ const notifierOnConnectionCloseActive = (absintheSocket: AbsintheSocket, notifie
   }
 };
 
-const notifierOnConnectionClose = (absintheSocket) => (notifier) => {
+const notifierOnConnectionClose = (absintheSocket: AbsintheSocket) => (notifier: Notifier<any, any>) => {
   if (notifier.isActive) {
     notifierOnConnectionCloseActive(absintheSocket, notifier);
   } else {
@@ -42,12 +42,13 @@ const notifierOnConnectionClose = (absintheSocket) => (notifier) => {
   }
 };
 
-const onConnectionClose = (absintheSocket) => () =>
+const onConnectionClose = (absintheSocket: AbsintheSocket) => () =>
   absintheSocket.notifiers.forEach(notifierOnConnectionClose(absintheSocket));
 
-const shouldJoinChannel = (absintheSocket) => !absintheSocket.channelJoinCreated && absintheSocket.notifiers.length > 0;
+const shouldJoinChannel = (absintheSocket: AbsintheSocket) =>
+  !absintheSocket.channelJoinCreated && absintheSocket.notifiers.length > 0;
 
-const onConnectionOpen = (absintheSocket) => () => {
+const onConnectionOpen = (absintheSocket: AbsintheSocket) => () => {
   if (shouldJoinChannel(absintheSocket)) {
     joinChannel(absintheSocket);
   }
