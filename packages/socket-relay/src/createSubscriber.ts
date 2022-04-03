@@ -1,9 +1,8 @@
-// @flow
-
 import { ControlledPromise, createControlledPromise } from '@absinthe/graphql-utils';
 import type { AbsintheSocket, Notifier, Observer } from '@absinthe/socket';
 import { notifierFind, observe, send, unobserveOrCancel } from '@absinthe/socket';
-import type { SubscribeFunction } from 'relay-runtime';
+import type { GraphQLResponse, SubscribeFunction } from 'relay-runtime';
+import { Observable } from 'relay-runtime';
 
 import subscriptions from './subscriptions';
 
@@ -17,14 +16,14 @@ const unobserveOrCancelIfNeeded = (
   }
 };
 
-const createDisposable = (
-  absintheSocket: AbsintheSocket,
-  { request }: Notifier<any, any>,
-  observer: Observer<any, any>,
-) => ({
-  dispose: () =>
-    unobserveOrCancelIfNeeded(absintheSocket, notifierFind(absintheSocket.notifiers, 'request', request), observer),
-});
+// const createDisposable = (
+//   absintheSocket: AbsintheSocket,
+//   { request }: Notifier<any, any>,
+//   observer: Observer<any, any>,
+// ) => ({
+//   dispose: () =>
+//     unobserveOrCancelIfNeeded(absintheSocket, notifierFind(absintheSocket.notifiers, 'request', request), observer),
+// });
 
 const onStart = (promise: ControlledPromise<Notifier<any, any>>) => (notifier: Notifier<any, any>) =>
   promise.resolve(notifier);
@@ -41,9 +40,7 @@ const onAbort =
  */
 const createSubscriber =
   (absintheSocket: AbsintheSocket, onRecoverableError?: (error: Error) => any): SubscribeFunction =>
-  ({ operationKind }, variables, _cacheConfig, legacyObserver) => {
-    // we need to place this logic here and not in ensureIsSubscription as if we
-    // do so, then flow is not able to infer we are validating operation
+  ({ operationKind }, variables) => {
     if (operationKind !== 'subscription') {
       throw new Error(`Expected subscription, but instead got:\n${operationKind}`);
     }
@@ -52,20 +49,28 @@ const createSubscriber =
 
     const promise = createControlledPromise<Notifier<any, any>>();
 
-    const observer = {
-      onAbort: onAbort(promise, legacyObserver?.onError),
-      onError: onRecoverableError,
-      onResult: legacyObserver?.onNext,
-      onStart: onStart(promise),
-    };
+    const observable = Observable.create<GraphQLResponse>((sink) => {
+      const observer = {
+        onStart: onStart(promise),
+        onAbort: onAbort(promise, sink.error),
+        onError: onRecoverableError,
+        onResult: sink.next,
+      };
 
-    observe(absintheSocket, notifier, observer);
+      observe(absintheSocket, notifier, observer);
 
-    const disposable = createDisposable(absintheSocket, notifier, observer);
+      return () => {
+        unobserveOrCancelIfNeeded(
+          absintheSocket,
+          notifierFind(absintheSocket.notifiers, 'request', notifier.request),
+          observer,
+        );
+      };
+    });
 
-    subscriptions.set(disposable, promise);
+    subscriptions.set(observable, promise);
 
-    return disposable;
+    return observable;
   };
 
 export default createSubscriber;

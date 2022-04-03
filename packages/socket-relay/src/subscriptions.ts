@@ -1,6 +1,6 @@
 import type { Notifier } from '@absinthe/socket';
-import type { Disposable } from 'react-relay';
+import type { GraphQLResponse, Observable } from 'relay-runtime';
 
-const subscriptions: WeakMap<Disposable, Promise<Notifier<any>>> = new WeakMap();
+const subscriptions: WeakMap<Observable<GraphQLResponse>, Promise<Notifier<any>>> = new WeakMap();
 
 export default subscriptions;

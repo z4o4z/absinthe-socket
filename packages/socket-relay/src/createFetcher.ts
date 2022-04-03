@@ -1,6 +1,6 @@
 // @flow
 
-import type { AbsintheSocket } from '@absinthe/socket';
+import type { AbsintheSocket, GqlOperationType } from '@absinthe/socket';
 import { observe, send } from '@absinthe/socket';
 import type { FetchFunction, GraphQLResponse, Variables } from 'relay-runtime';
 
@@ -14,7 +14,7 @@ const createFetcher =
     new Promise<GraphQLResponse>((resolve, reject) => {
       observe<GraphQLResponse, Variables>(
         absintheSocket,
-        send(absintheSocket, { operation: operationKind, variables }),
+        send(absintheSocket, { operation: operationKind as GqlOperationType, variables }),
         {
           onError: (...args) => onError?.(...args),
           onAbort: reject,
